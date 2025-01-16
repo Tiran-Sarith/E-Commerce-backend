@@ -32,4 +32,6 @@ public class ProductController {
         List<ProductDTO> productByAccessory = productService.getByCategory(category);
         return productByAccessory;
     }
+
+
 }
