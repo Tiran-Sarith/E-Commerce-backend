@@ -5,6 +5,7 @@ import com.e_commerce.e_commerce.entity.User;
 import com.e_commerce.e_commerce.repo.RoleRepo;
 import com.e_commerce.e_commerce.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -19,8 +20,8 @@ public class UserService {
     @Autowired
     private RoleRepo roleRepo;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public User registerNewUser(User user) {
@@ -45,7 +46,7 @@ public class UserService {
         if (!userRepo.existsById("admin123")) {
             User user = new User();
             user.setUserName("admin123");
-            user.setUserPassword("admin@123");
+            user.setUserPassword(getEncodedPassword("admin@123"));
             user.setUserFirstName("Tiran");
             user.setUserLastName("Wijerathne");
 
@@ -59,7 +60,7 @@ public class UserService {
         if (!userRepo.existsById("user123")) {
             User user = new User();
             user.setUserName("user123");
-            user.setUserPassword("user@123");
+            user.setUserPassword(getEncodedPassword("user@123"));
             user.setUserFirstName("Shalini");
             user.setUserLastName("Perera");
 
@@ -71,8 +72,8 @@ public class UserService {
         }
     }
 
-//    public String getEncodedPassword(String password) {
-//        return passwordEncoder.encode(password);
-//    }
+    public String getEncodedPassword(String password) {
+        return passwordEncoder.encode(password);
+    }
 }
 
