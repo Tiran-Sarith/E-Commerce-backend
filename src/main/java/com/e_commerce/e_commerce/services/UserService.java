@@ -23,7 +23,6 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     public User registerNewUser(User user) {
         return userRepo.save(user);
     }
