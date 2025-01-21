@@ -4,6 +4,7 @@ package com.e_commerce.e_commerce.controller;
 import com.e_commerce.e_commerce.entity.User;
 import com.e_commerce.e_commerce.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -26,11 +27,13 @@ public class UserController {
     }
 
     @GetMapping({"for-admin"})
+    @PreAuthorize("hasRole('Admin')")
     public String forAdmin(){
         return "This url is only accessible to admin";
     }
 
     @GetMapping({"for-user"})
+    @PreAuthorize("hasAnyRole('User', 'Admin')")
     public String forUser(){
         return "This url is only accessible to user";
     }
